@@ -12,13 +12,13 @@ const btnClose = document.querySelector('#modal-close');
 let humanScoreNumber = 0;
 let machineScoreNumber = 0;
 
-// Listas de vários Pokémon para sortear (você pode adicionar mais nomes se quiser!)
-const pokemonsFogo = ['charmander', 'vulpix', 'growlithe', 'ponyta', 'magmar', 'flareon', 'cyndaquil', 'houndour', 'torchic', 'chimchar', 'tepig', 'fennekin', 'litten'];
-const pokemonsAgua = ['squirtle', 'psyduck', 'poliwag', 'tentacool', 'slowpoke', 'seel', 'shellder', 'krabby', 'horsea', 'magikarp', 'vaporeon', 'totodile', 'marill', 'mudkip', 'piplup'];
-const pokemonsPlanta = ['bulbasaur', 'oddish', 'bellsprout', 'exeggcute', 'tangela', 'chikorita', 'hoppip', 'sunkern', 'treecko', 'seedot', 'shroomish', 'roselia', 'turtwig', 'snivy', 'chespin'];
+// Listas de vários Pokémon para sortear
+const pokemonsFire = ['charmander', 'vulpix', 'growlithe', 'ponyta', 'magmar', 'flareon', 'cyndaquil', 'houndour', 'torchic', 'chimchar', 'tepig', 'fennekin', 'litten'];
+const pokemonsWater = ['squirtle', 'psyduck', 'poliwag', 'tentacool', 'slowpoke', 'seel', 'shellder', 'krabby', 'horsea', 'magikarp', 'vaporeon', 'totodile', 'marill', 'mudkip', 'piplup'];
+const pokemonsPlant = ['bulbasaur', 'oddish', 'bellsprout', 'exeggcute', 'tangela', 'chikorita', 'hoppip', 'sunkern', 'treecko', 'seedot', 'shroomish', 'roselia', 'turtwig', 'snivy', 'chespin'];
 
 // Objeto para armazenar o Pokémon sorteado da rodada atual
-const pokemonData = {
+const pokemonDate = {
     fogo: { nome: '', sprite: '' },
     agua: { nome: '', sprite: '' },
     planta: { nome: '', sprite: '' }
@@ -33,27 +33,27 @@ const sortearPokemon = (lista) => lista[Math.floor(Math.random() * lista.length)
 // Função assíncrona para sortear e buscar as imagens na API
 async function loadPokemonSprites() {
     // Sorteia quem serão os representantes de Fogo, Água e Planta desta vez
-    pokemonData.fogo.nome = sortearPokemon(pokemonsFogo);
-    pokemonData.agua.nome = sortearPokemon(pokemonsAgua);
-    pokemonData.planta.nome = sortearPokemon(pokemonsPlanta);
+    pokemonDate.fogo.nome = sortearPokemon(pokemonsFire);
+    pokemonDate.agua.nome = sortearPokemon(pokemonsWater);
+    pokemonDate.planta.nome = sortearPokemon(pokemonsPlant);
 
-    for (const tipo in pokemonData) {
+    for (const tipo in pokemonDate) {
         try {
-            const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonData[tipo].nome}`);
+            const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonDate[tipo].nome}`);
             const data = await response.json();
             
             // Pega a imagem (sprite) e guarda
             const imageUrl = data.sprites.front_default;
-            pokemonData[tipo].sprite = imageUrl;
+            pokemonDate[tipo].sprite = imageUrl;
 
             // Altera a imagem do botão correspondente na tela
             const imgBtn = document.getElementById(`img-btn-${tipo}`);
             if(imgBtn) {
                 imgBtn.src = imageUrl;
-                imgBtn.alt = capitalizarNome(pokemonData[tipo].nome);
+                imgBtn.alt = capitalizarNome(pokemonDate[tipo].nome);
             }
         } catch (error) {
-            console.error(`Erro ao buscar o Pokémon ${pokemonData[tipo].nome}:`, error);
+            console.error(`Erro ao buscar o Pokémon ${pokemonDate[tipo].nome}:`, error);
         }
     }
 }
@@ -71,8 +71,8 @@ const closeModal = () => {
 btnClose.addEventListener('click', closeModal);
 
 const openModal = (human, machine, winner) => {
-    imgHuman.src = pokemonData[human].sprite;
-    imgMachine.src = pokemonData[machine].sprite;
+    imgHuman.src = pokemonDate[human].sprite;
+    imgMachine.src = pokemonDate[machine].sprite;
 
     if (winner === 'empate') {
         modalResult.textContent = 'Deu empate!';
@@ -96,8 +96,8 @@ const playMachine = () => {
 }
 
 const playTheGame = (human, machine) => {
-    const nomeHumano = capitalizarNome(pokemonData[human].nome);
-    const nomeMaquina = capitalizarNome(pokemonData[machine].nome);
+    const nomeHumano = capitalizarNome(pokemonDate[human].nome);
+    const nomeMaquina = capitalizarNome(pokemonDate[machine].nome);
 
     if (human === machine) {
         openModal(human, machine, 'empate');
