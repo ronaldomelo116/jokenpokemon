@@ -8,14 +8,83 @@ const imgMachine = document.querySelector('#img-machine');
 const modalPlayer = document.querySelector('#modal-player');
 const modalMachine = document.querySelector('#modal-machine');
 const btnClose = document.querySelector('#modal-close');
+const btnRules = document.querySelector('#btn-rules');
+const modalRules = document.querySelector('#modal-rules');
+const btnCloseRules = document.querySelector('#btn-close-rules');
 
 let humanScoreNumber = 0;
 let machineScoreNumber = 0;
 
+btnRules.addEventListener('click',() => {
+    modalRules.classList.add('ativo');
+});
+
+btnCloseRules.addEventListener('click', () => {
+    modalRules.classList.remove('ativo');
+});
+
 // Listas de vários Pokémon para sortear
-const pokemonsFire = ['charmander', 'vulpix', 'growlithe', 'ponyta', 'magmar', 'flareon', 'cyndaquil', 'houndour', 'torchic', 'chimchar', 'tepig', 'fennekin', 'litten'];
-const pokemonsWater = ['squirtle', 'psyduck', 'poliwag', 'tentacool', 'slowpoke', 'seel', 'shellder', 'krabby', 'horsea', 'magikarp', 'vaporeon', 'totodile', 'marill', 'mudkip', 'piplup'];
-const pokemonsPlant = ['bulbasaur', 'oddish', 'bellsprout', 'exeggcute', 'tangela', 'chikorita', 'hoppip', 'sunkern', 'treecko', 'seedot', 'shroomish', 'roselia', 'turtwig', 'snivy', 'chespin'];
+const pokemonsFire = [
+    // Gen 1
+    'charmander', 'vulpix', 'growlithe', 'ponyta', 'magmar', 'flareon',
+    // Gen 2
+    'cyndaquil', 'houndour', 'slugma',
+    // Gen 3
+    'torchic', 'numel', 'torkoal',
+    // Gen 4
+    'chimchar', 'magby',
+    // Gen 5
+    'tepig', 'pansear', 'darumaka', 'litwick', 'heatmor',
+    // Gen 6
+    'fennekin', 'fletchinder',
+    // Gen 7
+    'litten', 'salandit', 'turtonator',
+    // Gen 8
+    'scorbunny', 'sizzlipede',
+    // Gen 9
+    'fuecoco', 'capsakid'
+];
+
+const pokemonsWater = [
+    // Gen 1
+    'squirtle', 'psyduck', 'poliwag', 'tentacool', 'slowpoke',
+    'seel', 'shellder', 'krabby', 'horsea', 'magikarp', 'vaporeon',
+    // Gen 2
+    'totodile', 'marill', 'wooper', 'remoraid',
+    // Gen 3
+    'mudkip', 'carvanha', 'wailmer', 'barboach', 'clamperl',
+    // Gen 4
+    'piplup', 'buizel', 'finneon',
+    // Gen 5
+    'oshawott', 'panpour', 'tympole', 'basculin',
+    // Gen 6
+    'froakie', 'skrelp', 'clauncher',
+    // Gen 7
+    'popplio', 'dewpider',
+    // Gen 8
+    'sobble', 'arrokuda'
+];
+
+const pokemonsPlant = [
+    // Gen 1
+    'bulbasaur', 'oddish', 'bellsprout', 'exeggcute', 'tangela',
+    // Gen 2
+    'chikorita', 'hoppip', 'sunkern', 'sudowoodo',
+    // Gen 3
+    'treecko', 'seedot', 'shroomish', 'roselia', 'cacnea',
+    // Gen 4
+    'turtwig', 'budew', 'cherubi', 'snover',
+    // Gen 5
+    'snivy', 'pansage', 'maractus', 'deerling', 'ferroseed',
+    // Gen 6
+    'chespin', 'skiddo', 'phantump',
+    // Gen 7
+    'rowlet', 'fomantis', 'bounsweet',
+    // Gen 8
+    'grookey', 'gossifleur',
+    // Gen 9
+    'sprigatito', 'smoliv'
+];
 
 // Objeto para armazenar o Pokémon sorteado da rodada atual
 const pokemonDate = {
@@ -52,6 +121,12 @@ async function loadPokemonSprites() {
                 imgBtn.src = imageUrl;
                 imgBtn.alt = capitalizarNome(pokemonDate[tipo].nome);
             }
+
+            const nameBtn = document.getElementById(`name-${tipo}`);
+            if(nameBtn) {
+                nameBtn.textContent = capitalizarNome(pokemonDate[tipo].nome);
+            }
+
         } catch (error) {
             console.error(`Erro ao buscar o Pokémon ${pokemonDate[tipo].nome}:`, error);
         }
@@ -127,3 +202,4 @@ const playTheGame = (human, machine) => {
 const playHuman = (playChoice) => {
     playTheGame(playChoice, playMachine());
 };
+

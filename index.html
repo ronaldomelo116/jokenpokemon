@@ -7,6 +7,7 @@
     <title>Pokémon Jokenpô</title>
     <link rel="stylesheet" href="style.css">
     <link rel="icon" href="./assets/img/favicon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 </head>
 
 <body>
@@ -30,18 +31,34 @@
 
     <main class="container">
         <h1>Pokémon Jokenpô</h1>
+        <button id="btn-rules"><i class="bi bi-question-square"></i></button>
         <div class="select-button">
+
+            <div class="modal-rules" id="modal-rules">
+                <div class="box-rules">
+                    <h2><i class="bi bi-joystick"></i> Como jogar</h2>
+                    <p><i class="bi bi-fire"></i> Fogo vence <i class="bi bi-leaf-fill"></i> Planta</p>
+                    <p><i class="bi bi-leaf-fill"></i> Planta vence <i class="bi bi-water"></i> Água</p>
+                    <p><i class="bi bi-water"></i> Água vence <i class="bi bi-fire"></i> Fogo</p>
+                    <p>Escolhas iguais = Empate!</p>
+                    <button id="btn-close-rules">Entendido!</button>
+                </div>
+
+            </div>
 
             <button onclick="playHuman('fogo')" class="icones-button fire" id="fogo">
                 <img id="img-btn-fogo" src="" class="icones-img" alt="Fogo (Charmander)">
+                <span id="name-fogo" class="name-pokemon"></span>
             </button>
 
             <button onclick="playHuman('agua')" class="icones-button water" id="agua">
                 <img id="img-btn-agua" src="" class="icones-img" alt="Água (Squirtle)">
+                <span id="name-agua" class="name-pokemon"></span>
             </button>
 
             <button onclick="playHuman('planta')" class="icones-button plant" id="planta">
                 <img id="img-btn-planta" src="" class="icones-img" alt="Planta (Bulbasaur)">
+                <span id="name-planta" class="name-pokemon"></span>
             </button>
         </div>
         <p class="result"></p>
@@ -53,6 +70,28 @@
             <p class="machine-score">Pontuação da Máquina:</p><span id="machinecore" class="score">0</span>
         </div>
     </main>
+
+    <footer class="rodape">
+        <div class="rodape-content">
+            <div class="social-links">
+                <a href="https://github.com/ronaldomelo116/" rel="noopener noreferrer" target="_blank"
+                    aria-label="GitHub"><i class="bi bi-github icon-social"></i></a>
+                <a href="https://www.linkedin.com/in/ronaldo-melo-de-oliveira/" rel="noopener noreferrer"
+                    target="_blank" aria-label="LinkedIn"><i class="bi bi-linkedin icon-social"></i></i></a>
+                <a href="https://instagram.com/ronalldo.mello/" rel="noopener noreferrer" target="_blank"
+                    aria-label="Instagram"><i class="bi bi-instagram icon-social"></i></a>
+            </div>
+            <div class="footer-info">
+                <span>Desenvolvido Por</span>
+                <span class="separator">•</span>
+                <span class="neon-text developer-name">Ronaldo Mello</span>
+            </div>
+            <div class="copy">
+                <p><span>&copy; 2026.</span>Todos os direitos reservados</p>
+            </div>
+
+        </div>
+    </footer>
 
     <script src="script.js"></script>
 </body>
