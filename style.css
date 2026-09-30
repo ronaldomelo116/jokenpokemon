@@ -119,7 +119,8 @@ h1 {
     flex-shrink: 1;
     border: none;
     border-radius: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
     cursor: pointer;
     box-shadow: inset 0 0 10px rgb(0 0 0 / 0.5);
     transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
@@ -129,7 +130,7 @@ h1 {
     font-size: 0.7rem;
     font-weight: bold;
     text-transform: capitalize;
-    margin-top: 4px;
+    
 }
 
 .fire {
@@ -171,8 +172,9 @@ h1 {
 
 .icones-img {
     width: 100%;
-    padding: 10px;
+    padding: 5px;
 }
+
 
 .conteiner-score {
     display: flex;
@@ -375,7 +377,7 @@ h1 {
 
 .separator {
     color: #000000;
-    margin: 0 15px;
+    margin: 0 5px;
 }
 
 
