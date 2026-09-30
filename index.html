@@ -6,8 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokémon Jokenpô</title>
     <link rel="stylesheet" href="style.css">
-    <link rel="icon" href="./assets/img/favicon.svg" type="image/x-icon">
+    <link rel="apple-touch-icon" sizes="180x180" href="./assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16x16.png">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="manifest" href="/site.webmanifest">
 </head>
 
 <body>
@@ -17,12 +20,12 @@
             <div class="modal-choices">
                 <div class="modal-player" id="modal-player">
                     <p>Você</p>
-                    <img id="img-human" src="" alt="sua escolha">
+                    <img id="img-human" src="" alt="sua escolha" draggable="false">
                 </div>
                 <span class="modal-vs">VS</span>
                 <div class="modal-player" id="modal-machine">
                     <p>Máquina</p>
-                    <img id="img-machine" src="" alt="escolha da máquina">
+                    <img id="img-machine" src="" alt="escolha da máquina" draggable="false">
                 </div>
             </div>
             <button class="modal-close" id="modal-close" onclick="closeModal()">Jogar de novo</button>
@@ -47,17 +50,17 @@
             </div>
 
             <button onclick="playHuman('fogo')" class="icones-button fire" id="fogo">
-                <img id="img-btn-fogo" src="" class="icones-img" alt="Fogo (Charmander)">
+                <img id="img-btn-fogo" src="" class="icones-img" alt="Fogo (Charmander)" draggable="false">
                 <span id="name-fogo" class="name-pokemon"></span>
             </button>
 
             <button onclick="playHuman('agua')" class="icones-button water" id="agua">
-                <img id="img-btn-agua" src="" class="icones-img" alt="Água (Squirtle)">
+                <img id="img-btn-agua" src="" class="icones-img" alt="Água (Squirtle)" draggable="false">
                 <span id="name-agua" class="name-pokemon"></span>
             </button>
 
             <button onclick="playHuman('planta')" class="icones-button plant" id="planta">
-                <img id="img-btn-planta" src="" class="icones-img" alt="Planta (Bulbasaur)">
+                <img id="img-btn-planta" src="" class="icones-img" alt="Planta (Bulbasaur)" draggable="false">
                 <span id="name-planta" class="name-pokemon"></span>
             </button>
         </div>

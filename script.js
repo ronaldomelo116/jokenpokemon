@@ -11,16 +11,24 @@ const btnClose = document.querySelector('#modal-close');
 const btnRules = document.querySelector('#btn-rules');
 const modalRules = document.querySelector('#modal-rules');
 const btnCloseRules = document.querySelector('#btn-close-rules');
+const somClick = new Audio('sounds/click.ogg');
+const somWin = new Audio('sounds/win.ogg');
+const somLose = new Audio('sounds/lose.ogg');
+const somDraw = new Audio('sounds/draw.ogg');
 
 let humanScoreNumber = 0;
 let machineScoreNumber = 0;
 
-btnRules.addEventListener('click',() => {
+btnRules.addEventListener('click', () => {
     modalRules.classList.add('ativo');
+    somClick.currentTime = 0;
+    somClick.play();
 });
 
 btnCloseRules.addEventListener('click', () => {
     modalRules.classList.remove('ativo');
+    somClick.currentTime = 0;
+    somClick.play();
 });
 
 // Listas de vários Pokémon para sortear
@@ -110,20 +118,20 @@ async function loadPokemonSprites() {
         try {
             const response = await fetch(`https://pokeapi.co/api/v2/pokemon/${pokemonDate[tipo].nome}`);
             const data = await response.json();
-            
+
             // Pega a imagem (sprite) e guarda
             const imageUrl = data.sprites.front_default;
             pokemonDate[tipo].sprite = imageUrl;
 
             // Altera a imagem do botão correspondente na tela
             const imgBtn = document.getElementById(`img-btn-${tipo}`);
-            if(imgBtn) {
+            if (imgBtn) {
                 imgBtn.src = imageUrl;
                 imgBtn.alt = capitalizarNome(pokemonDate[tipo].nome);
             }
 
             const nameBtn = document.getElementById(`name-${tipo}`);
-            if(nameBtn) {
+            if (nameBtn) {
                 nameBtn.textContent = capitalizarNome(pokemonDate[tipo].nome);
             }
 
@@ -137,11 +145,13 @@ async function loadPokemonSprites() {
 loadPokemonSprites();
 
 const closeModal = () => {
+    somClick.currentTime = 0;
+    somClick.play();
     modal.classList.remove('ativo');
     modalPlayer.classList.remove('perdedor');
     modalMachine.classList.remove('perdedor');
-    
-  loadPokemonSprites(); 
+
+    loadPokemonSprites();
 }
 btnClose.addEventListener('click', closeModal);
 
@@ -175,6 +185,7 @@ const playTheGame = (human, machine) => {
     const nomeMaquina = capitalizarNome(pokemonDate[machine].nome);
 
     if (human === machine) {
+        somDraw.play();
         openModal(human, machine, 'empate');
         result.innerHTML = `Deu empate! Dois ${nomeHumano} anularam-se.`;
         result.style.color = 'blue';
@@ -184,6 +195,7 @@ const playTheGame = (human, machine) => {
         (human === 'agua' && machine === 'fogo')
     ) {
         openModal(human, machine, 'humano');
+        somWin.play();
         result.innerHTML = `Vitória! O seu ${nomeHumano} venceu o ${nomeMaquina}!`;
         result.style.color = 'green';
         humanScoreNumber++;
@@ -191,6 +203,7 @@ const playTheGame = (human, machine) => {
         yourScore.style.color = 'green';
     } else {
         openModal(human, machine, 'maquina');
+        somLose.play();
         result.innerHTML = `Derrota! O ${nomeMaquina} inimigo venceu o seu ${nomeHumano}.`;
         result.style.color = 'red';
         machineScoreNumber++;
@@ -201,5 +214,7 @@ const playTheGame = (human, machine) => {
 
 const playHuman = (playChoice) => {
     playTheGame(playChoice, playMachine());
+    somClick.currentTime = 0;
+    somClick.play();
 };
 
